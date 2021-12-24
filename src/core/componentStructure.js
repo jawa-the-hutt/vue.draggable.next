@@ -1,4 +1,29 @@
-const getHtmlElementFromNode = ({ el }) => el;
+const getHtmlElementFromNode = node => {
+  const nodeType = node.el.nodeType;
+  const parentElementCount = node.el.parentElement.childElementCount;
+  const parentChildNodesCount = node.el.parentElement.childNodes.length;
+
+  // we might have a text node fragment that Vue3 uses when the parent element
+  // has multiple root nodes.  For instance:
+  //
+  // <draggable v-model="rowData" tag="tbody" item-key="id">
+  //   <template #item="{ element, index }">
+  //     <table-row
+  //       :row="element"
+  //       :index="index
+  //     />
+  //   </template>
+  // </draggable>
+  //
+  // so we test for it here and if so, we return the next sibling as we don't want the
+  // __draggable_context added to what is essentially an empty, unreachable page element
+  if (nodeType === 3 && parentElementCount !== parentChildNodesCount) {
+    node = node.el.nextElementSibling;
+  }
+
+  if (node.el) return node.el;
+  else return node; // then we probably are returning the nextSibling.
+};
 const addContext = (domElement, context) =>
   (domElement.__draggable_context = context);
 const getContext = domElement => domElement.__draggable_context;
