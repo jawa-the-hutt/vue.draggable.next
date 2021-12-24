@@ -4469,9 +4469,29 @@ function _createClass(Constructor, protoProps, staticProps) {
 
 
 
-var getHtmlElementFromNode = function getHtmlElementFromNode(_ref) {
-  var el = _ref.el;
-  return el;
+var getHtmlElementFromNode = function getHtmlElementFromNode(node) {
+  var nodeType = node.el.nodeType;
+  var parentElementCount = node.el.parentElement.childElementCount;
+  var parentChildNodesCount = node.el.parentElement.childNodes.length; // we might have a text node fragment that Vue3 uses when the parent element
+  // has multiple root nodes.  For instance:
+  //
+  // <draggable v-model="rowData" tag="tbody" item-key="id">
+  //   <template #item="{ element, index }">
+  //     <table-row
+  //       :row="element"
+  //       :index="index
+  //     />
+  //   </template>
+  // </draggable>
+  //
+  // so we test for it here and if so, we return the next sibling as we don't want the
+  // __draggable_context added to what is essentially an empty, unreachable page element
+
+  if (nodeType === 3 && parentElementCount !== parentChildNodesCount) {
+    node = node.el.nextElementSibling;
+  }
+
+  if (node.el) return node.el;else return node; // then we probably are returning the nextSibling.
 };
 
 var addContext = function addContext(domElement, context) {
@@ -4483,13 +4503,13 @@ var getContext = function getContext(domElement) {
 };
 
 var componentStructure_ComponentStructure = /*#__PURE__*/function () {
-  function ComponentStructure(_ref2) {
-    var _ref2$nodes = _ref2.nodes,
-        header = _ref2$nodes.header,
-        defaultNodes = _ref2$nodes.default,
-        footer = _ref2$nodes.footer,
-        root = _ref2.root,
-        realList = _ref2.realList;
+  function ComponentStructure(_ref) {
+    var _ref$nodes = _ref.nodes,
+        header = _ref$nodes.header,
+        defaultNodes = _ref$nodes.default,
+        footer = _ref$nodes.footer,
+        root = _ref.root,
+        realList = _ref.realList;
 
     _classCallCheck(this, ComponentStructure);
 
@@ -4893,6 +4913,7 @@ var draggableComponent = Object(external_commonjs_vue_commonjs2_vue_root_Vue_["d
     spliceList: function spliceList() {
       var _arguments = arguments;
 
+      // @ts-ignore
       var spliceList = function spliceList(list) {
         return list.splice.apply(list, _toConsumableArray(_arguments));
       };
@@ -4946,7 +4967,8 @@ var draggableComponent = Object(external_commonjs_vue_commonjs2_vue_root_Vue_["d
       }
 
       removeNode(evt.item);
-      var newIndex = this.getVmIndexFromDomIndex(evt.newIndex);
+      var newIndex = this.getVmIndexFromDomIndex(evt.newIndex); // @ts-ignore
+
       this.spliceList(newIndex, 0, element);
       var added = {
         element: element,
@@ -4966,7 +4988,8 @@ var draggableComponent = Object(external_commonjs_vue_commonjs2_vue_root_Vue_["d
 
       var _this$context = this.context,
           oldIndex = _this$context.index,
-          element = _this$context.element;
+          element = _this$context.element; // @ts-ignore
+
       this.spliceList(oldIndex, 1);
       var removed = {
         element: element,
