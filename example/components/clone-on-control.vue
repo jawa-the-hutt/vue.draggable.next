@@ -20,12 +20,7 @@
 
     <div class="col-3">
       <h3>Draggable 2</h3>
-      <draggable
-        class="dragArea list-group"
-        :list="list2"
-        group="people"
-        item-key="id"
-      >
+      <draggable class="dragArea list-group" :list="list2" group="people" item-key="id">
         <template #item="{ element }">
           <div class="list-group-item">
             {{ element.name }}
@@ -41,12 +36,12 @@
 </template>
 
 <script>
-import draggable from "@/vuedraggable";
+import draggable from '@/vuedraggable';
 let idGlobal = 8;
 export default {
-  name: "clone-on-control",
-  display: "Clone on Control",
-  instruction: "Press Ctrl to clone element from list 1",
+  name: 'clone-on-control',
+  display: 'Clone on Control',
+  instruction: 'Press Ctrl to clone element from list 1',
   order: 4,
   components: {
     draggable
@@ -54,14 +49,14 @@ export default {
   data() {
     return {
       list1: [
-        { name: "Jesus", id: 1 },
-        { name: "Paul", id: 2 },
-        { name: "Peter", id: 3 }
+        { name: 'Jesus', id: 1 },
+        { name: 'Paul', id: 2 },
+        { name: 'Peter', id: 3 }
       ],
       list2: [
-        { name: "Luc", id: 5 },
-        { name: "Thomas", id: 6 },
-        { name: "John", id: 7 }
+        { name: 'Luc', id: 5 },
+        { name: 'Thomas', id: 6 },
+        { name: 'John', id: 7 }
       ],
       controlOnStart: true
     };
@@ -71,7 +66,7 @@ export default {
       return { name, id: idGlobal++ };
     },
     pullFunction() {
-      return this.controlOnStart ? "clone" : true;
+      return this.controlOnStart ? 'clone' : true;
     },
     start({ originalEvent }) {
       this.controlOnStart = originalEvent.ctrlKey;

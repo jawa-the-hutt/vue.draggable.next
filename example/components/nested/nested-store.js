@@ -4,28 +4,28 @@ export const nested = {
     elements: [
       {
         id: 1,
-        name: "Shrek",
+        name: 'Shrek',
         elements: []
       },
       {
         id: 2,
-        name: "Fiona",
+        name: 'Fiona',
         elements: [
           {
             id: 4,
-            name: "Lord Farquad",
+            name: 'Lord Farquad',
             elements: []
           },
           {
             id: 5,
-            name: "Prince Charming",
+            name: 'Prince Charming',
             elements: []
           }
         ]
       },
       {
         id: 3,
-        name: "Donkey",
+        name: 'Donkey',
         elements: []
       }
     ]
@@ -37,7 +37,7 @@ export const nested = {
   },
   actions: {
     updateElements: ({ commit }, payload) => {
-      commit("updateElements", payload);
+      commit('updateElements', payload);
     }
   }
 };

@@ -37,11 +37,7 @@
         </template>
 
         <template #header>
-          <div
-            class="btn-group list-group-item"
-            role="group"
-            aria-label="Basic example"
-          >
+          <div class="btn-group list-group-item" role="group" aria-label="Basic example">
             <button class="btn btn-secondary" @click="add2">Add</button>
             <button class="btn btn-secondary" @click="replace2">Replace</button>
           </div>
@@ -56,11 +52,11 @@
 </template>
 
 <script>
-import draggable from "@/vuedraggable";
+import draggable from '@/vuedraggable';
 let id = 1;
 export default {
-  name: "two-list-headerslots",
-  display: "Two list header slot",
+  name: 'two-list-headerslots',
+  display: 'Two list header slot',
   order: 14,
   components: {
     draggable
@@ -68,28 +64,28 @@ export default {
   data() {
     return {
       list: [
-        { name: "John 1", id: 0 },
-        { name: "Joao 2", id: 1 },
-        { name: "Jean 3", id: 2 }
+        { name: 'John 1', id: 0 },
+        { name: 'Joao 2', id: 1 },
+        { name: 'Jean 3', id: 2 }
       ],
       list2: [
-        { name: "Jonny 4", id: 3 },
-        { name: "Guisepe 5", id: 4 }
+        { name: 'Jonny 4', id: 3 },
+        { name: 'Guisepe 5', id: 4 }
       ]
     };
   },
   methods: {
-    add: function() {
-      this.list.push({ name: "Juan " + id, id: id++ });
+    add() {
+      this.list.push({ name: 'Juan ' + id, id: id++ });
     },
-    replace: function() {
-      this.list = [{ name: "Edgard", id: id++ }];
+    replace() {
+      this.list = [{ name: 'Edgard', id: id++ }];
     },
-    add2: function() {
-      this.list2.push({ name: "Juan " + id, id: id++ });
+    add2() {
+      this.list2.push({ name: 'Juan ' + id, id: id++ });
     },
-    replace2: function() {
-      this.list2 = [{ name: "Edgard", id: id++ }];
+    replace2() {
+      this.list2 = [{ name: 'Edgard', id: id++ }];
     }
   }
 };

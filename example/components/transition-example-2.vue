@@ -1,9 +1,7 @@
 <template>
   <div class="row">
     <div class="col-2">
-      <button class="btn btn-secondary button" @click="sort">
-        To original order
-      </button>
+      <button class="btn btn-secondary button" @click="sort">To original order</button>
     </div>
 
     <div class="col-6">
@@ -25,9 +23,7 @@
         <template #item="{ element }">
           <li class="list-group-item">
             <i
-              :class="
-                element.fixed ? 'fa fa-anchor' : 'glyphicon glyphicon-pushpin'
-              "
+              :class="element.fixed ? 'fa fa-anchor' : 'glyphicon glyphicon-pushpin'"
               @click="element.fixed = !element.fixed"
               aria-hidden="true"
             ></i>
@@ -42,22 +38,22 @@
 </template>
 
 <script>
-import draggable from "@/vuedraggable";
+import draggable from '@/vuedraggable';
 
 const message = [
-  "vue.draggable",
-  "draggable",
-  "component",
-  "for",
-  "vue.js 2.0",
-  "based",
-  "on",
-  "Sortablejs"
+  'vue.draggable',
+  'draggable',
+  'component',
+  'for',
+  'vue.js 2.0',
+  'based',
+  'on',
+  'Sortablejs'
 ];
 
 export default {
-  name: "transition-example-2",
-  display: "Transitions",
+  name: 'transition-example-2',
+  display: 'Transitions',
   order: 7,
   components: {
     draggable
@@ -79,9 +75,9 @@ export default {
     dragOptions() {
       return {
         animation: 200,
-        group: "description",
+        group: 'description',
         disabled: false,
-        ghostClass: "ghost"
+        ghostClass: 'ghost'
       };
     }
   }

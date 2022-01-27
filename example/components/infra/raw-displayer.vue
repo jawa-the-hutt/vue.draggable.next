@@ -15,7 +15,7 @@ const props = {
   }
 };
 export default {
-  name: "raw-displayer",
+  name: 'raw-displayer',
   props,
   computed: {
     valueString() {

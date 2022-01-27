@@ -28,10 +28,10 @@
 </template>
 
 <script>
-import draggable from "@/vuedraggable";
+import draggable from '@/vuedraggable';
 export default {
-  name: "table-example",
-  display: "Table",
+  name: 'table-example',
+  display: 'Table',
   order: 8,
   components: {
     draggable
@@ -39,10 +39,10 @@ export default {
   data() {
     return {
       list: [
-        { id: 1, name: "Abby", sport: "basket" },
-        { id: 2, name: "Brooke", sport: "foot" },
-        { id: 3, name: "Courtenay", sport: "volley" },
-        { id: 4, name: "David", sport: "rugby" }
+        { id: 1, name: 'Abby', sport: 'basket' },
+        { id: 2, name: 'Brooke', sport: 'foot' },
+        { id: 3, name: 'Courtenay', sport: 'volley' },
+        { id: 4, name: 'David', sport: 'rugby' }
       ],
       dragging: false
     };

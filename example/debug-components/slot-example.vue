@@ -71,13 +71,13 @@ export default {
     };
   },
   methods: {
-    clear: function() {
+    clear() {
       this.list = [];
     },
-    add: function() {
+    add() {
       this.list.push({ name: "Juan " + id, id: id++ });
     },
-    remove: function() {
+    remove() {
       this.list.pop();
     }
   }

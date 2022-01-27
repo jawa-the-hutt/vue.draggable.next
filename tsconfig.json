@@ -1,17 +1,42 @@
 {
     "compilerOptions": {
-        "target": "es2016",
-        "lib":["esnext", "DOM"],
+        "target": "esnext",
+        "module": "esnext",
         "moduleResolution": "node",
         "allowJs": true,
-        "checkJs": true,
+        "checkJs": false,
         "emitDeclarationOnly": true,
         "downlevelIteration": true,
         "esModuleInterop": true, 
-        "outDir": "./types",
-        "declaration": true
+        "outDir": "types",
+        "declaration": true,
+        "baseUrl": ".",
+        "paths": {
+            "@/*": [
+                "src/*"
+            ]
+        },
+        "lib": [
+            "esnext",
+            "dom",
+            "dom.iterable",
+            "scripthost"
+        ],
+        "types": [
+            "vite/client",
+            "@types/node",
+        ]
     },
-    "files": [
-        "./src/vuedraggable.js"
+    "include": [
+        "./src/**/*.vue",
+        "./src/**/*.ts",
+        "./src/**/*.tsx",
+        "./src/**/*.js",
+        "./.eslintrc.js",
+        "./vite.config.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist"
     ]
 }

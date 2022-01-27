@@ -10,10 +10,10 @@
 </template>
 
 <script>
-import nestedDraggable from "./infra/nested";
+import nestedDraggable from './infra/nested.vue';
 export default {
-  name: "nested-example",
-  display: "Nested",
+  name: 'nested-example',
+  display: 'Nested',
   order: 15,
   components: {
     nestedDraggable
@@ -22,25 +22,25 @@ export default {
     return {
       list: [
         {
-          name: "task 1",
+          name: 'task 1',
           tasks: [
             {
-              name: "task 2",
+              name: 'task 2',
               tasks: []
             }
           ]
         },
         {
-          name: "task 3",
+          name: 'task 3',
           tasks: [
             {
-              name: "task 4",
+              name: 'task 4',
               tasks: []
             }
           ]
         },
         {
-          name: "task 5",
+          name: 'task 5',
           tasks: []
         }
       ]

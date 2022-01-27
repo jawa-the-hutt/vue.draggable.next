@@ -37,11 +37,11 @@
 </template>
 
 <script>
-import draggable from "@/vuedraggable";
+import draggable from '@/vuedraggable';
 let id = 1;
 export default {
-  name: "footerslot",
-  display: "Footer slot",
+  name: 'footerslot',
+  display: 'Footer slot',
   order: 12,
   components: {
     draggable
@@ -49,23 +49,23 @@ export default {
   data() {
     return {
       list: [
-        { name: "John", id: 0 },
-        { name: "Joao", id: 1 },
-        { name: "Jean", id: 2 }
+        { name: 'John', id: 0 },
+        { name: 'Joao', id: 1 },
+        { name: 'Jean', id: 2 }
       ],
       dragging: false,
       componentData: {
-        type: "transition",
-        name: "flip-list"
+        type: 'transition',
+        name: 'flip-list'
       }
     };
   },
   methods: {
-    add: function() {
-      this.list.push({ name: "Juan " + id, id: id++ });
+    add() {
+      this.list.push({ name: 'Juan ' + id, id: id++ });
     },
-    replace: function() {
-      this.list = [{ name: "Edgard", id: id++ }];
+    replace() {
+      this.list = [{ name: 'Edgard', id: id++ }];
     }
   }
 };

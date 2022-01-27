@@ -2,7 +2,7 @@
   <div id="app">
     <a href="https://github.com/SortableJS/vue.draggable.next" target="_blank">
       <img
-        style="position: fixed; top: 0; right: 0; border: 0; z-index:99999"
+        style="position: fixed; top: 0; right: 0; border: 0; z-index: 99999"
         width="149"
         height="149"
         src="https://github.blog/wp-content/uploads/2008/12/forkme_right_gray_6d6d6d.png?resize=149%2C149"
@@ -12,25 +12,15 @@
       />
     </a>
 
-    <div class="container ">
+    <div class="container">
       <div class="jumbotron logo">
-        <img
-          class="draggable"
-          alt="Vue.draggable logo"
-          src="./assets/logo.svg"
-        />
+        <img class="draggable" alt="Vue.draggable logo" src="./assets/logo.svg" />
 
         <div id="badges">
-          <a
-            target="_blank"
-            href="https://circleci.com/gh/SortableJS/vue.draggable.next"
-            ><img
-              src="https://circleci.com/gh/SortableJS/vue.draggable.next.svg?style=shield"
-            />
+          <a target="_blank" href="https://circleci.com/gh/SortableJS/vue.draggable.next"
+            ><img src="https://circleci.com/gh/SortableJS/vue.draggable.next.svg?style=shield" />
           </a>
-          <a
-            target="_blank"
-            href="https://codecov.io/gh/SortableJS/vue.draggable.next"
+          <a target="_blank" href="https://codecov.io/gh/SortableJS/vue.draggable.next"
             ><img
               src="https://codecov.io/gh/SortableJS/vue.draggable.next/branch/master/graph/badge.svg"
             />
@@ -38,23 +28,17 @@
           <a
             target="_blank"
             href="https://codebeat.co/projects/github-com-sortablejs-vue-draggable-master"
-            ><img
-              src="https://codebeat.co/badges/7a6c27c8-2d0b-47b9-af55-c2eea966e713"
-            />
+            ><img src="https://codebeat.co/badges/7a6c27c8-2d0b-47b9-af55-c2eea966e713" />
           </a>
           <a
             target="_blank"
             href="https://github.com/SortableJS/vue.draggable.next/issues?q=is%3Aopen+is%3Aissue"
-            ><img
-              src="https://img.shields.io/github/issues/SortableJS/vue.draggable.next.svg"
-            />
+            ><img src="https://img.shields.io/github/issues/SortableJS/vue.draggable.next.svg" />
           </a>
           <a target="_blank" href="https://www.npmjs.com/package/vuedraggable"
             ><img src="https://img.shields.io/npm/dt/vuedraggable.svg" />
           </a>
-          <a
-            target="_blank"
-            href="https://www.npmjs.com/package/vuedraggable/v/next"
+          <a target="_blank" href="https://www.npmjs.com/package/vuedraggable/v/next"
             ><img src="https://img.shields.io/npm/v/vuedraggable/next.svg" />
           </a>
           <a target="_blank" href="https://www.npmjs.com/package/vuedraggable"
@@ -63,19 +47,13 @@
           <a
             target="_blank"
             href="https://github.com/SortableJS/vue.draggable.next/blob/master/LICENSE"
-            ><img
-              src="https://img.shields.io/github/license/SortableJS/vue.draggable.next.svg"
-            />
+            ><img src="https://img.shields.io/github/license/SortableJS/vue.draggable.next.svg" />
           </a>
         </div>
       </div>
 
       <ul class="nav nav-tabs" role="tablist">
-        <li
-          class="nav-item"
-          v-for="component in componentList"
-          :key="component.name"
-        >
+        <li class="nav-item" v-for="component in componentList" :key="component.name">
           <a
             class="nav-link"
             data-toggle="tab"
@@ -97,16 +75,14 @@
           v-for="component in componentList"
           :key="component.name"
         >
-          <div class=" justify-content-center jumbotron main-container">
+          <div class="justify-content-center jumbotron main-container">
             <div class="row icon-container">
               <div>{{ component.instruction }}</div>
 
               <a
                 class="icon github"
                 target="_blank"
-                :href="
-                  `https://github.com/SortableJS/vue.draggable.next/blob/master/example/components/${component.name}.vue`
-                "
+                :href="`https://github.com/SortableJS/vue.draggable.next/blob/master/example/components/${component.name}.vue`"
               >
                 <button class="btn btn-secondary">
                   View code
@@ -124,38 +100,39 @@
 </template>
 
 <script>
-import $ from "jquery";
+import $ from 'jquery';
+const modules = import.meta.globEager('./components/*.vue');
 
-const requireContext = require.context("./components/", false, /\.vue$/);
-const components = requireContext.keys().reduce((acc, key) => {
-  const component = requireContext(key).default;
-  acc[component.name] = component;
-  return acc;
-}, {});
+let components = {};
 
-const showAll = process.env.VUE_APP_SHOW_ALL_EXAMPLES === "true";
+Object.keys(modules).map((key) => {
+  const component = modules[key].default;
+  components[component.name] = component;
+});
+
+const showAll = import.meta.env.VITE_SHOW_ALL_EXAMPLES === 'true';
+
 if (showAll) {
   const order = Object.keys(components);
-  const requireContextDebug = require.context(
-    "./debug-components/",
-    false,
-    /\.vue$/
+  const debugModules = import.meta.globEager('./debug-components/*.vue');
+
+  Object.assign(
+    Object.keys(debugModules).map((key) => {
+      const component = debugModules[key].default;
+      component.order += order;
+      component.display = `DEBUG: ${component.display}`;
+      components[component.name] = component;
+    }),
+    components
   );
-  requireContextDebug.keys().reduce((acc, key) => {
-    const component = requireContextDebug(key).default;
-    component.order += order;
-    component.display = `DEBUG: ${component.display}`;
-    acc[component.name] = component;
-    return acc;
-  }, components);
 }
 
 export default {
-  name: "app",
+  name: 'app',
   components,
   data() {
     const componentList = Object.values(components)
-      .filter(component => component.show)
+      .filter((component) => component.show)
       .sort((a, b) => a.order - b.order);
     return {
       componentList
@@ -163,17 +140,17 @@ export default {
   },
   mounted() {
     this.toRoute(this.$route);
-    $('a[data-toggle="tab"]').on("shown.bs.tab", e => {
+    $('a[data-toggle="tab"]').on('shown.bs.tab', (e) => {
       this.$router.push({ path: e.target.dataset.route });
     });
   },
   methods: {
     toRoute(route) {
-      $(`a[data-route="${route.path}"]`).tab("show");
+      $(`a[data-route="${route.path}"]`).tab('show');
     }
   },
   watch: {
-    $route: function(route) {
+    $route: function (route) {
       this.toRoute(route);
     }
   }
@@ -206,7 +183,7 @@ export default {
   margin-left: 0;
 }
 
->>> h3 {
+h3 {
   font-size: 1.4em;
 }
 
@@ -237,11 +214,11 @@ a {
   min-height: 500px;
 }
 
-.tooltip[x-placement^="bottom"] {
+.tooltip[x-placement^='bottom'] {
   margin-top: 5px;
 }
 
-.tooltip[x-placement^="bottom"] .tooltip-arrow {
+.tooltip[x-placement^='bottom'] .tooltip-arrow {
   border-width: 0 5px 5px 5px;
   border-left-color: transparent !important;
   border-right-color: transparent !important;
@@ -252,11 +229,11 @@ a {
   margin-bottom: 0;
 }
 
-.tooltip[x-placement^="right"] {
+.tooltip[x-placement^='right'] {
   margin-left: 5px;
 }
 
-.tooltip[x-placement^="right"] .tooltip-arrow {
+.tooltip[x-placement^='right'] .tooltip-arrow {
   border-width: 5px 5px 5px 0;
   border-left-color: transparent !important;
   border-top-color: transparent !important;
@@ -267,11 +244,11 @@ a {
   margin-right: 0;
 }
 
-.tooltip[x-placement^="left"] {
+.tooltip[x-placement^='left'] {
   margin-right: 5px;
 }
 
-.tooltip[x-placement^="left"] .tooltip-arrow {
+.tooltip[x-placement^='left'] .tooltip-arrow {
   border-width: 5px 0 5px 5px;
   border-top-color: transparent !important;
   border-right-color: transparent !important;
@@ -282,13 +259,13 @@ a {
   margin-right: 0;
 }
 
-.tooltip[aria-hidden="true"] {
+.tooltip[aria-hidden='true'] {
   visibility: hidden;
   opacity: 0;
   transition: opacity 0.15s, visibility 0.15s;
 }
 
-.tooltip[aria-hidden="false"] {
+.tooltip[aria-hidden='false'] {
   visibility: visible;
   opacity: 1;
   transition: opacity 0.15s;

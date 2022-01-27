@@ -1,6 +1,6 @@
-import { camelize } from "../util/string";
-import { events, isReadOnly } from "./sortableEvents";
-import { isHtmlAttribute } from "../util/tags";
+import { camelize } from '../util/string';
+import { events, isReadOnly } from './sortableEvents';
+import { isHtmlAttribute } from '../util/tags';
 
 function project(entries) {
   return entries.reduce((res, [key, value]) => {
@@ -9,11 +9,13 @@ function project(entries) {
   }, {});
 }
 
-function getComponentAttributes({ $attrs, componentData = {} }) {
+function getComponentAttributes({ ref, $attrs, componentData = {} }) {
   const attributes = project(
     Object.entries($attrs).filter(([key, _]) => isHtmlAttribute(key))
   );
+
   return {
+    ref,
     ...attributes,
     ...componentData
   };
@@ -21,12 +23,13 @@ function getComponentAttributes({ $attrs, componentData = {} }) {
 
 function createSortableOption({ $attrs, callBackBuilder }) {
   const options = project(getValidSortableEntries($attrs));
+
   Object.entries(callBackBuilder).forEach(([eventType, eventBuilder]) => {
-    events[eventType].forEach(event => {
+    events[eventType].forEach((event) => {
       options[`on${event}`] = eventBuilder(event);
     });
   });
-  const draggable = `[data-draggable]${options.draggable || ""}`;
+  const draggable = `[data-draggable]${options.draggable || ''}`;
   return {
     ...options,
     draggable

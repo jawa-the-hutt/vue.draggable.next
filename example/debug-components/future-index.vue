@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import draggableList from "./nested/draggable-list";
+import draggableList from "./nested/draggable-list.vue";
 
 let id = 1;
 export default {
@@ -56,10 +56,10 @@ export default {
     };
   },
   methods: {
-    add: function() {
+    add() {
       this.list.push({ name: "Juan " + id, id: id++ });
     },
-    replace: function() {
+    replace() {
       this.list = [{ name: "Edgard", id: id++ }];
     }
   }

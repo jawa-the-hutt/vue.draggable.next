@@ -31,12 +31,12 @@
 </template>
 
 <script>
-import draggable from "@/vuedraggable";
+import draggable from '@/vuedraggable';
 export default {
-  name: "nested-test",
+  name: 'nested-test',
   methods: {
     emitter(value) {
-      this.$emit("input", value);
+      this.$emit('input', value);
     }
   },
   components: {
@@ -46,9 +46,9 @@ export default {
     dragOptions() {
       return {
         animation: 0,
-        group: "description",
+        group: 'description',
         disabled: false,
-        ghostClass: "ghost"
+        ghostClass: 'ghost'
       };
     },
     // this.value when input = v-model

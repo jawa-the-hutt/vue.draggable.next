@@ -1,11 +1,5 @@
 <template>
-  <draggable
-    class="dragArea"
-    tag="ul"
-    :list="tasks"
-    :group="{ name: 'g1' }"
-    item-key="name"
-  >
+  <draggable class="dragArea" tag="ul" :list="tasks" :group="{ name: 'g1' }" item-key="name">
     <template #item="{ element }">
       <li>
         <p>{{ element.name }}</p>
@@ -15,7 +9,7 @@
   </draggable>
 </template>
 <script>
-import draggable from "@/vuedraggable";
+import draggable from '@/vuedraggable';
 
 export default {
   props: {
@@ -27,7 +21,7 @@ export default {
   components: {
     draggable
   },
-  name: "nested-draggable"
+  name: 'nested-draggable'
 };
 </script>
 <style scoped>
