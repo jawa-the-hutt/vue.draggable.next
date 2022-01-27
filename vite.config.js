@@ -34,8 +34,6 @@ const server = {
 };
 
 export default defineConfig(({ command, mode }) => {
-  console.log('command - ', command);
-  console.log('mode - ', mode);
   if (command === 'serve' || (command === 'build' && mode === 'development')) {
     return {
       root: './example',
@@ -43,11 +41,6 @@ export default defineConfig(({ command, mode }) => {
       plugins,
       build: {
         minify: false,
-        // lib: {
-        //   entry: resolve('./src/vuedraggable.js'),
-        //   name: 'vuedraggable',
-        //   formats: ['es', 'umd', 'cjs']
-        // },
         outDir: '../docs',
         rollupOptions: {
           // // make sure to externalize deps that shouldn't be bundled
